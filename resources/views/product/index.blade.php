@@ -31,7 +31,7 @@
                         <tr>
                             <th scope="row">{{ $ndx + 1 }}</th>
                             <td>{{ $product->name ?? '' }}</td>
-                            <td>{{ $product->price ?? '' }}</td>
+                            <td>&#8369;{{ number_format($product->price ?? '',  2, '.') }}</td>
                             <td>{{ $product->quantity ?? '' }}</td>
                             <td><a href="{{ route('product.edit', $product->product_id) }}">
                                 <i class='fas fa-edit' style='font-size:15px;color:gray'></i>    

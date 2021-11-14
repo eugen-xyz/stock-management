@@ -44,7 +44,7 @@
                 <label for="price">Price</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text">P</span>
+                      <span class="input-group-text">&#8369;</span>
                     </div>
                     <input type="text" class="form-control" name="price" id="price" value="{{ $product->price }}" aria-label="price">
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\OrderItem;
 
 class ShopController extends Controller
 {
@@ -26,7 +27,13 @@ class ShopController extends Controller
 
         $products = Product::where('status', 1)->get();
 
-        return view('shop.index', compact('data', 'products'));
+        $itemCount = 0;
+        if(session('customerID') !== null) {
+            $itemCount = OrderItem::where('reference', session('customerID'))->sum('quantity');
+        }
+        
+
+        return view('shop.index', compact('data', 'products', 'itemCount'));
     }
 
     /**

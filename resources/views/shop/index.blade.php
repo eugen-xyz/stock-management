@@ -4,12 +4,14 @@
 @include('layouts.navigation')
 @include('layouts.header')
 
-
-{{ session('customerID') }}
 <!-- Section-->
 <section class="py-5">
+    @if(session()->has('message'))
+        <p class="alert alert-info">{{ Session::get('message') }}</p>
+    @endif
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            
             @forelse ($products as $product)
                 
                 <form id="form" action="{{ route('item.store') }} " method="POST">
@@ -40,15 +42,14 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    
-                                    P{{ $product->price ?? '' }}
+                                    &#8369;{{ $product->price ?? '' }}
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-body p-4">
                                 <div class="text-center justify-content-center">
                                     <input type="hidden" name="product_id" value="{{ $product->product_id }}">
-                                    <input type="text" name="quantity" style="width: 75px;" required  placeholder="Quantity">
+                                    <input type="text" name="quantity" style="width: 75px;"  placeholder="Quantity">
                                 </div>
                             </div>
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
