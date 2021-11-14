@@ -20,3 +20,5 @@ Route::post('item', 'OrderItemController@store')->name('item.store');
 Route::get('cart', 'OrderItemController@index')->name('get.cart');
 Route::get('pay', 'OrderItemController@pay')->name('product.pay');
 Route::get('clear', 'OrderItemController@clear')->name('product.clear');
+Route::get('orders', 'OrderController@index')->name('order.list');
+Route::get('view/{order}', 'OrderController@show')->name('order.view');

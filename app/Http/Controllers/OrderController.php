@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\OrderItem;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -13,7 +15,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'List of Orders',
+            'description' => 'list of successful orders'
+        ];
+
+        $orders = Order::all();
+
+        return view('order.index', compact('data', 'orders'));
     }
 
     /**
@@ -43,9 +52,21 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($order)
     {
-        //
+        $order = Order::where('order_id', $order)->first();
+
+        $products = OrderItem::where('reference', $order->reference)->get();
+
+        $data = [
+            'title' => $order->reference,
+            'description' => 'View order summary'
+        ];
+
+
+        return view('order.show', compact('data', 'order', 'products'));
+
+
     }
 
     /**
