@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'ShopController@index')->name('get.shop');
 
 Route::resource('product', 'ProductController');
+Route::post('item', 'OrderItemController@store')->name('item.store');
