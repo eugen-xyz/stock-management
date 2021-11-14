@@ -7,6 +7,11 @@ use App\Models\Product;
 
 class ShopController extends Controller
 {
+
+    public function __construct()
+    {
+        if(session('customerID') === null) session(['customerID' => 'ORD-' . rand(0, 9999)]);
+    }
     /**
      * Display a listing of the resource.
      *
