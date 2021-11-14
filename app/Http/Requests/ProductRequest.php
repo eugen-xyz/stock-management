@@ -23,8 +23,15 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+        $method = request()->method();
+
+        $name = 'required|string|unique:products,name';
+        if($method != 'post') {
+            $name = 'required|string';
+        }
+
         return [
-            'name'      => 'required|string|unique:products,name',
+            'name'      => $name,
             'price'     => 'required|numeric',
             'quantity'  => 'required|numeric',
         ];
