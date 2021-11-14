@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'Inventory',
+            'description' => 'View your product inventory'
+        ];
+
+        $products = Product::where('status', 1)->get();
+
+        return view('product.index', compact('data', 'products'));
     }
 
     /**
@@ -24,7 +32,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'Add new Product',
+            'description' => 'Add new product inventory'
+        ];
+        
+        return view('product.create', compact('data'));
     }
 
     /**
@@ -33,9 +46,21 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $product = new Product();
+        
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->status = 1;
+
+        $product->save();
+
+        session()->flash('message', 'Product added!'); 
+
+
+        return redirect()->route('product.create');
     }
 
     /**
@@ -46,7 +71,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return 'show products';
     }
 
     /**
@@ -57,7 +82,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $data = [
+            'title' => 'Edit Product',
+            'description' => 'edit selected product'
+        ];
+        
+        return view('product.edit', compact('data', 'product'));
     }
 
     /**
@@ -67,9 +97,19 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+    
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->status = 1;
+
+        $product->save();
+
+        session()->flash('message', 'Product updated!'); 
+
+        return redirect()->route('product.edit', $product);
     }
 
     /**
