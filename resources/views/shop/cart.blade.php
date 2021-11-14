@@ -68,9 +68,9 @@
                 <a href="{{ route('product.pay') }}"><button type="button" class="btn btn-success">Pay</button></a>
             </div>
 
-            <div style="float: right; margin-right: 10px;">
+            {{-- <div style="float: right; margin-right: 10px;">
                 <a href="{{ route('product.clear') }}"><button type="button" class="btn btn-danger">Clear Cart</button></a>
-            </div>
+            </div> --}}
         @endif
 
 
